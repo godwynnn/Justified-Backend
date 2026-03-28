@@ -4,3 +4,7 @@ django-cors-headers==4.9.0
 asgiref==3.11.1
 sqlparse==0.5.5
 tzdata==2025.3
+python-dotenv==1.0.1
+celery>=5.3.6
+redis>=5.0.1
+cloudinary==1.42.1

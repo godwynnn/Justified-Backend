@@ -4,7 +4,8 @@ class Sermon(models.Model):
     title = models.CharField(max_length=255)
     speaker = models.CharField(max_length=255)
     date = models.DateField()
-    scripture = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True)
     video_url = models.URLField(blank=True, null=True)
     audio_url = models.URLField(blank=True, null=True)
     notes_url = models.URLField(blank=True, null=True)
@@ -40,3 +41,20 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"Message from {self.name}"
+
+SERVICE_TYPES = [
+    ('worship', 'Worship Service'),
+    ('bible_study', 'Bible Study'),
+    ('prayer', 'Prayer Session'),
+]
+
+class Service(models.Model):
+    name = models.CharField(max_length=100)
+    service_type = models.CharField(max_length=20, choices=SERVICE_TYPES)
+    day_of_week = models.CharField(max_length=20)
+    start_time = models.TimeField()
+    end_time = models.TimeField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.day_of_week}"

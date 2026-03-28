@@ -4,10 +4,11 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.settings')
 django.setup()
 
-from api.models import Sermon, Event, Leader
+from api.models import Sermon, Event, Leader, Service
 
 def seed():
     Sermon.objects.all().delete()
+    Service.objects.all().delete()
     
     sermons = [
         {"title": "Walking in Faith", "speaker": "Pastor John Doe", "date": "2026-03-10", "scripture": "Hebrews 11:1", "notes_url": "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?q=80&w=2940&auto=format&fit=crop"},
@@ -20,8 +21,17 @@ def seed():
     
     for s in sermons:
         Sermon.objects.create(**s)
+
+    services = [
+        {"name": "Sunday Worship", "service_type": "worship", "day_of_week": "Sunday", "start_time": "10:00:00", "end_time": "12:00:00"},
+        {"name": "Mid-Week Bible Study", "service_type": "bible_study", "day_of_week": "Wednesday", "start_time": "18:00:00", "end_time": "19:30:00"},
+        {"name": "Friday Prayer Hour", "service_type": "prayer", "day_of_week": "Friday", "start_time": "19:00:00", "end_time": "20:00:00"},
+    ]
+
+    for s in services:
+        Service.objects.create(**s)
         
-    print("Database seeded with sermons successfully.")
+    print("Database seeded with sermons and services successfully.")
 
 if __name__ == '__main__':
     seed()

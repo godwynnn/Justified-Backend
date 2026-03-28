@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Sermon, Event, Leader, ContactMessage
+from .models import Sermon, Event, Leader, ContactMessage, Service
+
+@admin.register(Service)
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'service_type', 'day_of_week', 'start_time', 'is_active')
+    list_filter = ('service_type', 'day_of_week', 'is_active')
 
 @admin.register(Sermon)
 class SermonAdmin(admin.ModelAdmin):
