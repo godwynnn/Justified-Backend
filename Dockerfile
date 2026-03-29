@@ -19,4 +19,6 @@ RUN pip install -r requirements.txt
 
 # Copy the project code into the container
 COPY . /app/
-CMD [ "daphne","server.asgi:application" ]
+EXPOSE 10000
+
+CMD ["gunicorn", "server.wsgi:application", "--bind", "0.0.0.0:10000"]
